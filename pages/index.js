@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../styles/Home.module.scss'
 
+import Wrapper from '../components/wrapper';
 import About from '../components/About'
 import Services from '../components/Services'
 import Tools from '../components/Tools'
@@ -8,7 +9,7 @@ import GetInTouch from '../components/GetInTouch'
 
 const Home = () => {
   return (
-    <>
+    <Wrapper>
       <div className={styles.banner} id={'Home'}>
         <div className={styles.intro}>
           <h1 className={styles.name}>Hi, I'm Rey</h1>
@@ -20,7 +21,7 @@ const Home = () => {
       <Services />
       <Tools />
       <GetInTouch />
-    </>
+    </Wrapper >  
   )
 }
 

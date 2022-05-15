@@ -1,6 +1,4 @@
 import React from 'react';
-import Wrapper from '../components/wrapper';
-
 import '../styles/globals.css';
 import 'antd/dist/antd.css';
 
@@ -15,10 +13,8 @@ function MyApp({ Component, pageProps }) {
 	initialize({ environment, token });
 
 	return (
-		<>
-			<Wrapper>
-				<Component {...pageProps} token={token} />
-			</Wrapper>
+		<>	
+			<Component {...pageProps} token={token} />
 		</>
 	);
 }

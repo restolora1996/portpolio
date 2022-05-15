@@ -1,8 +1,8 @@
-exports.environment = process.env.CUSTOM_ENV;
+exports.environment = process.env.CUSTOM_ENV || 'development';
 
 exports.apiUrl = {
-	// development: 'http://localhost:8080/',
-	development: 'https://rnetworkapi.herokuapp.com/',
+	development: 'http://localhost:8080/',
+	// development: 'https://rnetworkapi.herokuapp.com/',
 	sandbox: 'https://rnetworkapi.herokuapp.com/',
 	staging: 'https://rnetworkapi.herokuapp.com/',
 	production: 'https://rnetworkapi.herokuapp.com/'

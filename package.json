@@ -23,6 +23,7 @@
     "react-reveal": "^1.2.2",
     "sass": "^1.49.9",
     "socket.io-client": "^4.4.1",
+    "socketio-wildcard": "^2.0.0",
     "yup": "^0.32.11"
   }
 }

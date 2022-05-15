@@ -5,6 +5,8 @@ import { database } from '../sdk';
 import { message, List, Button, Modal, Form, Input, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 
+import Wrapper from '../components/wrapper';
+
 const Test = () => {
 	const [data, setData] = useState(null);
 	const [modal, setModal] = useState(false);
@@ -20,27 +22,6 @@ const Test = () => {
 	useEffect(() => {
 		fetch();
 	}, [setData, form]);
-
-	function vertMirror(strng) {
-		// Your code
-		const str = strng.split('\n');
-		const q = str.map(e => {
-			return e.split('').reverse().join('');
-		});
-		return q.join('\n');
-	}
-	function horMirror(strng) {
-		// Your code
-		const str = strng.split('\n');
-		return str.reverse().join('\n');
-	}
-	function oper(fct, s) {
-		// Your code
-		return fct(s);
-	}
-	const s = 'abcd\nefgh\nijkl\nmnop';
-	const q = oper(horMirror, s);
-	console.log(q);
 
 	const onDelete = async id => {
 		try {
@@ -92,63 +73,65 @@ const Test = () => {
 
 	return (
 		<>
-			{data && (
-				<List
-					header={
-						<div>
-							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<h1>About</h1>
-								<Button onClick={() => setModal(true)}>
-									<PlusOutlined style={{ fontSize: '14px' }} />
-								</Button>
-							</div>
-						</div>
-					}
-					bordered
-					dataSource={data}
-					renderItem={d => (
-						<List.Item>
-							<div>{d.Description}</div>
+			<Wrapper>
+				{data && (
+					<List
+						header={
 							<div>
-								<Button onClick={() => onEdit(d)}>
-									<EditOutlined />
-								</Button>{' '}
-								<Popconfirm
-									title="Are you sure to delete this task?"
-									onConfirm={() => onDelete(d._id)}
-									// onCancel={cancel}
-									okText="Yes"
-									cancelText="No">
-									<Button>
-										<DeleteOutlined />
+								<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+									<h1>About</h1>
+									<Button onClick={() => setModal(true)}>
+										<PlusOutlined style={{ fontSize: '14px' }} />
 									</Button>
-								</Popconfirm>
+								</div>
 							</div>
-						</List.Item>
-					)}
-				/>
-			)}
-			{modal && (
-				<Modal
-					title={form ? 'Edit About' : 'New About'}
-					visible={modal}
-					onOk={formik.handleSubmit}
-					onCancel={close}>
-					<Form layout="vertical">
-						<Form.Item id="Description" label="Description" required={true}>
-							<Input
-								id="Description"
-								name="Description"
-								onChange={formik.handleChange}
-								value={formik.values.Description}
-							/>
-							{formik.errors.Description && formik.touched.Description ? (
-								<div style={{ color: 'red' }}>{formik.errors.Description}</div>
-							) : null}
-						</Form.Item>
-					</Form>
-				</Modal>
-			)}
+						}
+						bordered
+						dataSource={data}
+						renderItem={d => (
+							<List.Item>
+								<div>{d.Description}</div>
+								<div>
+									<Button onClick={() => onEdit(d)}>
+										<EditOutlined />
+									</Button>{' '}
+									<Popconfirm
+										title="Are you sure to delete this task?"
+										onConfirm={() => onDelete(d._id)}
+										// onCancel={cancel}
+										okText="Yes"
+										cancelText="No">
+										<Button>
+											<DeleteOutlined />
+										</Button>
+									</Popconfirm>
+								</div>
+							</List.Item>
+						)}
+					/>
+				)}
+				{modal && (
+					<Modal
+						title={form ? 'Edit About' : 'New About'}
+						visible={modal}
+						onOk={formik.handleSubmit}
+						onCancel={close}>
+						<Form layout="vertical">
+							<Form.Item id="Description" label="Description" required={true}>
+								<Input
+									id="Description"
+									name="Description"
+									onChange={formik.handleChange}
+									value={formik.values.Description}
+								/>
+								{formik.errors.Description && formik.touched.Description ? (
+									<div style={{ color: 'red' }}>{formik.errors.Description}</div>
+								) : null}
+							</Form.Item>
+						</Form>
+					</Modal>
+				)}
+			</Wrapper>
 		</>
 	);
 };
